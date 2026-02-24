@@ -1,0 +1,6 @@
+let age = "pramod"; // This is a string literal. It represents a sequence of characters enclosed in double quotes. In this case, the string literal is "pramod". The variable age is assigned the value of this string literal.
+let isStudent = true; // This is a boolean literal. It represents a logical value that can be either true or false. In this case, the boolean literal is true. The variable isStudent is assigned the value of this boolean literal.
+let pi = 3.14; // This is a numeric literal. It represents a number. In this case, the numeric literal is 3.14. The variable pi is assigned the value of this numeric literal.
+let name = 'John'; // This is a string literal using single quotes. It represents a sequence of characters enclosed in single quotes. In this case, the string literal is 'John'. The variable name is assigned the value of this string literal.
+let nullValue = null; // This is a null literal. It represents the absence of any value. In this case, the null literal is null. The variable nullValue is assigned the value of this null literal.
+let undefinedValue = undefined; // This is an undefined literal. It represents a variable that has been declared but has not been assigned a value. In this case, the undefined literal is undefined. The variable undefinedValue is assigned the value of this undefined literal.
