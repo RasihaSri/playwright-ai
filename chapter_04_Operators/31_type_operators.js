@@ -7,3 +7,4 @@ console.log (typeof null); // "object" (this is a quirk in JavaScript)
 console.log (typeof { name: "Alice", age: 30 }); // "object"
 console.log (typeof [1, 2, 3]); // "object" (arrays are also objects in JavaScript)
 console.log (typeof function() {}); // "function"
+console.log (typeof NaN); // "number"
