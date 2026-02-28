@@ -10,33 +10,33 @@
 // - 500 → "FAIL - Internal Server Error: Backend issue"
 // - Any other → "UNKNOWN - Unhandled status code"
 
-let statusCode = 200;
+let statusCode = 401;
 
 switch (statusCode) {
     case 200:
-        console.log(`Status ${statusCode}: PASS - OK: Request successful`);
+        console.log(`Status Code : ${statusCode} Result : PASS - OK: Request successful`);
         break;
     case 201:
-        console.log(`Status ${statusCode}: PASS - Created: Resource created successfully`);
+        console.log(`Status Code : ${statusCode} Result : PASS - Created: Resource created successfully`);
         break;
     case 301:
-        console.log(`Status ${statusCode}: WARNING - Moved Permanently: URL has changed`);
+        console.log(`Status Code : ${statusCode} Result : WARNING - Moved Permanently: URL has changed`);
         break;
     case 400:
-        console.log(`Status ${statusCode}: FAIL - Bad Request: Check request payload`);
+        console.log(`Status Code : ${statusCode} Result : FAIL - Bad Request: Check request payload`);
         break;
     case 401:
-        console.log(`Status ${statusCode}: FAIL - Unauthorized: Check auth token`);
+        console.log(`Status Code : ${statusCode} Result : FAIL - Unauthorized: Check auth token`);
         break;
     case 403:
-        console.log(`Status ${statusCode}: FAIL - Forbidden: Insufficient permissions`);
+        console.log(`Status Code : ${statusCode} Result : FAIL - Forbidden: Insufficient permissions`);
         break;
     case 404:
-        console.log(`Status ${statusCode}: FAIL - Not Found: Check endpoint URL`);
+        console.log(`Status Code : ${statusCode} Result : FAIL - Not Found: Check endpoint URL`);
         break;
     case 500:
-        console.log(`Status ${statusCode}: FAIL - Internal Server Error: Backend issue`);
+        console.log(`Status Code : ${statusCode} Result : FAIL - Internal Server Error: Backend issue`);
         break;
     default:
-        console.log(`Status ${statusCode}: UNKNOWN - Unhandled status code`);
+        console.log(`Status Code : ${statusCode} Result : UNKNOWN - Unhandled status code`);
 }
