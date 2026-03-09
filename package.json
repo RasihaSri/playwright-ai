@@ -1,0 +1,29 @@
+{
+  "name": "learning-playwright-ai-batch",
+  "version": "1.0.0",
+  "description": "A project for learning Playwright with AI batch examples.",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/learning-playwright-ai-batch.git"
+  },
+  "keywords": [
+    "playwright",
+    "automation",
+    "testing",
+    "javascript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/learning-playwright-ai-batch/issues"
+  },
+  "homepage": "https://github.com/yourusername/learning-playwright-ai-batch#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}
