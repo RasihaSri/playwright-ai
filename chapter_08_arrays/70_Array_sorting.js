@@ -9,6 +9,8 @@ console.log(fruits); // ["apple", "banana", "grape", "orange"]
 
 // Sorting numbers requires a compare function
 let numbers = [40, 100, 1, 5, 25];
+// numbers.sort(); // Incorrect sorting for numbers, default sort compares as strings, not numbers
+// console.log(numbers); // [1, 100, 25, 40, 5]
 numbers.sort((a, b) => a - b); // Ascending order
 console.log(numbers); // [1, 5, 25, 40, 100]
 
