@@ -2,6 +2,7 @@
   "name": "learning-playwright-ai-batch",
   "version": "1.0.0",
   "description": "A project for learning Playwright with AI batch examples.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
