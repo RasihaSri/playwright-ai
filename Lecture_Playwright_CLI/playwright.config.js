@@ -1,8 +1,8 @@
 // @ts-check
-const { defineConfig, devices } = require('@playwright/test');
-const path = require('path');
+import { defineConfig, devices } from '@playwright/test';
+import { resolve } from 'path';
 
-module.exports = defineConfig({
+export default defineConfig({
   testDir: './cli_project/tests',
   timeout: 30000,
   retries: 0, // No retries - we want to capture intentional failures
@@ -31,8 +31,8 @@ module.exports = defineConfig({
   ],
 
   reporter: [
-    ['html', { outputFolder: path.resolve(__dirname, 'cli_project/reports/html-report'), open: 'never' }],
-    ['json', { outputFile: path.resolve(__dirname, 'cli_project/reports/results.json') }],
+    ['html', { outputFolder: resolve(__dirname, 'cli_project/reports/html-report'), open: 'never' }],
+    ['json', { outputFile: resolve(__dirname, 'cli_project/reports/results.json') }],
     ['./cli_project/reporters/CustomTTAReporter.js'],
   ],
 });

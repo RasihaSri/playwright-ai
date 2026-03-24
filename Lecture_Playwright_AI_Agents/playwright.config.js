@@ -1,8 +1,10 @@
 // @ts-check
-const { defineConfig } = require('@playwright/test');
-const path = require('path');
+import { defineConfig } from '@playwright/test';
+import { resolve } from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
-module.exports = defineConfig({
+export default defineConfig({
   testDir: './agents_project/tests',
   timeout: 30000,
   retries: 0, // No retries - we want to capture intentional failures
@@ -16,8 +18,8 @@ module.exports = defineConfig({
   },
 
   reporter: [
-    ['html', { outputFolder: path.resolve(__dirname, 'agents_project/reports/html-report'), open: 'never' }],
-    ['json', { outputFile: path.resolve(__dirname, 'agents_project/reports/results.json') }],
+    ['html', { outputFolder: resolve(__dirname, 'agents_project/reports/html-report'), open: 'never' }],
+    ['json', { outputFile: resolve(__dirname, 'agents_project/reports/results.json') }],
     ['./agents_project/reporters/CustomTTAReporter.js'],
   ],
 });
