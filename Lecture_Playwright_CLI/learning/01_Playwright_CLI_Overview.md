@@ -1,5 +1,6 @@
 # Playwright CLI Overview
 
+
 ## What is the Playwright CLI?
 
 The Playwright CLI is the command-line interface provided by the `@playwright/test` package. It is the primary way to run tests, generate test code, view reports, debug, and manage browsers -- all from the terminal.
