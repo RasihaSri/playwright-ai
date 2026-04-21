@@ -1,110 +1,121 @@
-// 1. Define interfaces for user data
+// Access Modifiers in TypeScript
 
-// Interfaces describe the structure of an object.
+// TypeScript has three main access modifiers:
 
-interface User1 {
-    id: number;
-    name: string;
-    email: string;
-    isActive: boolean;
-}
+// public (default)
+// private
+// protected
+// 1. public (Default)
 
-const user1: User1 = {
-    id: 1,
-    name: "Rasiha",
-    email: "rasiha@example.com",
-    isActive: true
-};
-// 2. Create interfaces with optional properties
+// Accessible everywhere — inside class, outside class, even in other files.
 
-// Use ? to mark properties as optional.
+class User1 {
+    public name: string;
 
-interface UserProfile {
-    id: number;
-    name: string;
-    email?: string;   // optional
-    phone?: string;   // optional
-}
-
-const user2: UserProfile = {
-    id: 2,
-    name: "Amit"
-    // email and phone are not required
-};
-// 3. Extend interfaces for inheritance
-
-// Interfaces can inherit from other interfaces using extends.
-
-interface Person {
-    name: string;
-    age: number;
-}
-
-interface Employee extends Person {
-    employeeId: number;
-    department: string;
-}
-
-const emp: Employee = {
-    name: "Miti",
-    age: 25,
-    employeeId: 101,
-    department: "QA"
-};
-
-// You can extend multiple interfaces too:
-
-interface Contact {
-    email: string;
-}
-
-interface Staff extends Person, Contact {
-    role: string;
-}
-// 4. Implement interfaces in classes
-
-// Classes use implements to follow an interface contract.
-
-interface IUser {
-    id: number;
-    name: string;
-    login(): void;
-}
-
-class UserAccount implements IUser {
-    id: number;
-    name: string;
-
-    constructor(id: number, name: string) {
-        this.id = id;
+    constructor(name: string) {
         this.name = name;
     }
+}
 
-    login(): void {
-        console.log(`${this.name} logged in`);
+const u = new User1("Rasiha");
+console.log(u.name); // ✅ Works
+
+// 👉 If you don’t write anything, it’s automatically public.
+
+// 2. private
+
+// Accessible only inside the same class.
+
+class User {
+    private password: string;
+
+    constructor(password: string) {
+        this.password = password;
+    }
+
+    showPassword() {
+        return this.password; // ✅ allowed inside class
     }
 }
 
-const u1 = new UserAccount(1, "Sumu");
-u1.login();
-// Bonus: Combining everything
-interface BaseUser {
-    id: number;
-    name: string;
-}
+const u2 = new User("1234");
+// console.log(u2.password); // ❌ Error - cannot access private member via object
 
-interface AdvancedUser extends BaseUser {
-    email?: string;
-}
+// 👉 Even child classes cannot access private members.
 
-class Admin implements AdvancedUser {
-    id: number;
-    name: string;
-    email?: string;
+// 3. protected
 
-    constructor(id: number, name: string, email?: string) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
+// Accessible:
+
+// ✅ Inside the class
+// ✅ Inside child (derived) classes
+// ❌ NOT accessible outside (even via object)
+class Person1 {
+    protected age: number;
+
+    constructor(age: number) {
+        this.age = age;
     }
 }
+
+class Employee1 extends Person1 {
+    showAge() {
+        console.log(this.age); // ✅ allowed (child class)
+    }
+}
+
+const emp1 = new Employee1(25);
+emp1.showAge();
+
+// console.log(emp1.age); // ❌ Error - cannot access protected member via object
+
+// ⚠️ Important Question You Asked
+// 👉 What happens with protected in a different folder / export?
+
+// This is where many people get confused.
+
+// ✅ Key Rule:
+
+// protected has nothing to do with folders or files
+// It depends only on inheritance (extends).
+
+// Example with Different Files
+// 📁 Person.ts
+// export class Person2 {
+//     protected age: number;
+
+//     constructor(age: number) {
+//         this.age = age;
+//     }
+// }
+// 📁 Employee.ts (different folder/file)
+// import { Person2 } from "./Person2";
+
+// export class Employee2 extends Person2 {
+//     getAge() {
+//         return this.age; // ✅ Works (because of inheritance)
+//     }
+// }
+// 📁 Test.ts
+// import { Employee2 } from "./Employee";
+
+// const emp2 = new Employee2(30);
+
+// console.log(emp2.age); // ❌ Error - cannot access protected member via object, even in different file
+
+// 🔥 Final Conclusion (Very Important)
+// Modifier	Same Class	Child Class	Outside Class	Different File
+// public	✅	✅	✅	✅
+// private	✅	❌	❌	❌
+// protected	✅	✅	❌	❌ (unless extended)
+// 🧠 Key Insight (What interviewer expects)
+// protected is NOT about file access
+// It is about inheritance access
+// Even if it's in another folder/file:
+// ✅ Works if extended
+// ❌ Fails if accessed directly
+// ✔️ What You Can Say (Short Answer)
+
+// You can confidently say:
+
+// "In TypeScript, public is accessible everywhere, private is restricted to the same class, and protected allows access within the class and its subclasses. Even across different files or folders, protected works only through inheritance and cannot be accessed directly from an object."
