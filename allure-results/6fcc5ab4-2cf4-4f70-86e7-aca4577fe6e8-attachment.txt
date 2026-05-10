@@ -1,0 +1,5 @@
+(node:7652) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 6)
+(Use `node.EXE --trace-warnings ...` to show where the warning was created)
+(node:7652) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 7)
+(node:7652) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 8)
+(node:7652) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 9)

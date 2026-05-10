@@ -1,0 +1,2 @@
+Total funds available in the account: $50,000.00
+Amount displayed in review transfer page: $5000.00

@@ -1,0 +1,147 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: 05_Allure_Reporting\Task_TTA_Bank_Transfer.spec.ts >> Perform Bank Fund Transfer from TTA Bank
+- Location: tests\05_Allure_Reporting\Task_TTA_Bank_Transfer.spec.ts:3:5
+
+# Error details
+
+```
+Error: expect(received).toEqual(expected) // deep equality
+
+Expected: 5000
+Received: "$5000.00"
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - status [ref=e9]: Account created successfully!
+    - generic [ref=e10]:
+      - complementary [ref=e11]:
+        - generic [ref=e12]:
+          - img [ref=e13]
+          - generic [ref=e16]: TTA Bank
+        - navigation [ref=e18]:
+          - button "Dashboard" [ref=e19] [cursor=pointer]:
+            - img [ref=e20]
+            - text: Dashboard
+          - button "Transfer Funds" [ref=e25] [cursor=pointer]:
+            - img [ref=e26]
+            - text: Transfer Funds
+          - button "Expense Tracker" [ref=e29] [cursor=pointer]:
+            - img [ref=e30]
+            - text: Expense Tracker
+          - button "Transactions" [ref=e33] [cursor=pointer]:
+            - img [ref=e34]
+            - text: Transactions
+          - button "AI Support" [ref=e38] [cursor=pointer]:
+            - img [ref=e39]
+            - text: AI Support
+          - button "Settings" [ref=e41] [cursor=pointer]:
+            - img [ref=e42]
+            - text: Settings
+        - generic [ref=e45]:
+          - generic [ref=e46]:
+            - img "User" [ref=e47]
+            - generic [ref=e48]:
+              - generic [ref=e49]: Rasiha Sri
+              - generic [ref=e50]: rasiha@ttabank.com
+          - button "Sign Out" [ref=e51] [cursor=pointer]:
+            - img [ref=e52]
+            - text: Sign Out
+      - main [ref=e55]:
+        - generic [ref=e56]:
+          - heading "Transfer Funds" [level=1] [ref=e57]
+          - button [ref=e59] [cursor=pointer]:
+            - img [ref=e60]
+        - generic [ref=e65]:
+          - generic [ref=e66]:
+            - button "Transfer Money" [ref=e67] [cursor=pointer]
+            - button "Manage Beneficiaries" [ref=e68] [cursor=pointer]
+          - generic [ref=e70]:
+            - img [ref=e73]
+            - heading "Review Transfer" [level=3] [ref=e76]
+            - paragraph [ref=e77]: Please verify the details before confirming.
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - generic [ref=e80]: From
+                - generic [ref=e81]: Savings Account
+              - generic [ref=e82]:
+                - generic [ref=e83]: To
+                - generic [ref=e84]: Sarah Smith
+              - generic [ref=e85]:
+                - generic [ref=e86]: Amount
+                - generic [ref=e87]: $5000.00
+              - generic [ref=e88]:
+                - generic [ref=e89]: Note
+                - generic [ref=e90]: "-"
+            - generic [ref=e91]:
+              - button "Back" [ref=e92] [cursor=pointer]
+              - button "Confirm Transfer" [ref=e93] [cursor=pointer]
+  - generic [ref=e94]: $0k
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '@playwright/test';
+  2  | 
+  3  | test ('Perform Bank Fund Transfer from TTA Bank', async ({ page }) => {
+  4  | 
+  5  |     let transferAmount = 5000;
+  6  |     let remainingAmount: number = 0;
+  7  |     
+  8  |     await page.goto ("https://tta-bank-digital-973242068062.us-west1.run.app/");
+  9  | 
+  10 |     await page.waitForTimeout(2000);
+  11 |     await expect (page.locator('//h1[text()="TTA Bank"]')).toBeVisible();
+  12 |     await expect (page.getByPlaceholder("you@example.com")).toBeVisible();
+  13 |     await expect (page.getByPlaceholder("you@example.com")).toHaveValue("alex.morgan@ttabank.com");
+  14 |     await expect (page.getByPlaceholder("••••••••")).toBeVisible();
+  15 |     await page.getByRole ("button", { name: "Sign Up" }).click();
+  16 | 
+  17 |     await page.getByPlaceholder("John Doe").fill("Rasiha Sri");
+  18 |     await page.getByPlaceholder("you@example.com").fill("rasiha@ttabank.com");
+  19 |     await page.getByPlaceholder("••••••••").fill("password123");
+  20 |     await page.getByRole("button", { name: "Create Account" }).click();
+  21 | 
+  22 | 
+  23 |     let totalFunds = page.locator ('//p[text()="Total Balance"]/following-sibling::h3');
+  24 |     let totalFundsText = await totalFunds.textContent();
+  25 |     if (totalFundsText === null) {
+  26 |         throw new Error("Total funds text not found");
+  27 |     }
+  28 |     console.log ("Total funds available in the account: " + totalFundsText);
+  29 | 
+  30 |     await page.getByRole ("button", { name: "Transfer Funds" }).click();
+  31 |     await expect (page.getByRole ("button", { name: "Transfer Money" })).toBeVisible();
+  32 |     await page.getByPlaceholder("0.00").fill(`${transferAmount.toString()}`);
+  33 |     await page.getByRole ("button", { name: "Continue" }).click();
+  34 | 
+  35 |     await expect (page.getByText("Review Transfer")).toBeVisible();
+  36 |     let reviewAmount = await page.locator (`//span[text()="Amount"]/following-sibling::span`).textContent();
+  37 |     console.log ("Amount displayed in review transfer page: " + reviewAmount);
+> 38 |     expect (reviewAmount).toEqual(transferAmount);
+     |                           ^ Error: expect(received).toEqual(expected) // deep equality
+  39 | 
+  40 |     await page.getByRole('button', { name : 'Confirm Transfer'}).click();
+  41 |     await page.getByRole('button', { name : 'Dashboard'}).click();
+  42 | 
+  43 |     remainingAmount = balancetoTextConversion(totalFundsText) - transferAmount;
+  44 |     expect (balancetoTextConversion(totalFundsText)).toBe(remainingAmount);
+  45 | 
+  46 | })
+  47 | 
+  48 | function balancetoTextConversion (balance: string): number {
+  49 |         return parseFloat(balance.replace(/[$,]/g, ""));
+  50 | }
+  51 | 
+```
