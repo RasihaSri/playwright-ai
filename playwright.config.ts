@@ -22,7 +22,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['list'], ['html'], ['allure-playwright'], ['./CustomTTAReporter.ts']],
+  reporter: [['list'], ['html'], ['allure-playwright'], ['./utils/CustomTTAReporter.ts']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     // baseURL: 'http://localhost:3000',
@@ -30,6 +30,7 @@ export default defineConfig({
     headless: false,
     video: 'on',
     screenshot: 'on',
+    viewport: { width: 1920, height: 1080 }
   },
 
   /* Configure projects for major browsers */
