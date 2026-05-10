@@ -1,4 +1,4 @@
-/// <reference types="@playwright/test" />
+// / <reference types="@playwright/test" />
 import { test, expect, Page } from '@playwright/test';
 
 test.skip('skipped test', async ({ page }) =>  {

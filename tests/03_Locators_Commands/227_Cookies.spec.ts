@@ -28,7 +28,10 @@ test ('locators are lazy, strict and auto-wait', async ({ page, context }) => {
 
         // await context.clearCookies();
 
-        console.log ("Total length of cookies: " + (await context.cookies()).length);
+    console.log ("Total length of cookies: " + (await context.cookies()).length);
+    cookies.forEach(function (cookie) {
+        console.log("  " + cookie.name + " = " + cookie.value);
+    });
 
     await page.goBack();
     await page.waitForTimeout(2000);        
