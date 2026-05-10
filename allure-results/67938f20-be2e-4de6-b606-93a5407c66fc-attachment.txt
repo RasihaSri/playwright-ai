@@ -1,0 +1,8 @@
+{
+  "vehicleName": "Tata Nexon",
+  "ownerName": "Rasiha",
+  "regNumber": "TN 01 RS 2905",
+  "vehicleType": "Hatchback",
+  "year": "2026",
+  "notes": "Vehicle has amazing features"
+}
