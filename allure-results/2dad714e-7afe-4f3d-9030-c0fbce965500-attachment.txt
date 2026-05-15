@@ -1,0 +1,1 @@
+File path: C:\Users\Rasiha Sri\Downloads\LearningPlaywrightFundamentals\tests\14_File_Upload\testdata.txt
